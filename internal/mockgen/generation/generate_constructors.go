@@ -2,11 +2,11 @@ package generation
 
 import (
 	"fmt"
-	"go/ast"
 	"strings"
 	"unicode"
 
 	"github.com/dave/jennifer/jen"
+	"github.com/derision-test/go-mockgen/internal/mockgen/types"
 )
 
 func generateMockStructConstructor(iface *wrappedInterface, outputImportPath string) jen.Code {
@@ -129,7 +129,7 @@ func makeDefaultHookField(iface *wrappedInterface, method *wrappedMethod, functi
 	return compose(jen.Id(fieldName), jen.Op(":"), initializer)
 }
 
-func generateStructInitializer(structName string, typeParams []*ast.Field, fields ...jen.Code) jen.Code {
+func generateStructInitializer(structName string, typeParams []types.TypeParam, fields ...jen.Code) jen.Code {
 	// &<StructName>{ fields, ... }
 	return compose(addTypes(jen.Op("&").Id(structName), typeParams, false), jen.Values(padFields(fields)...))
 }

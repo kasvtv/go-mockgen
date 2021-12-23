@@ -9,11 +9,16 @@ import (
 type Interface struct {
 	Name       string
 	ImportPath string
-	TypeParams []*ast.Field
+	TypeParams []TypeParam
 	Methods    []*Method
 }
 
-func newInterfaceFromTypeSpec(name, importPath string, typeSpec *ast.TypeSpec, underlyingType *types.Interface) *Interface {
+type TypeParam struct {
+	Name string
+	Type types.Type
+}
+
+func newInterfaceFromTypeSpec(name, importPath string, typeSpec *ast.TypeSpec, underlyingType *types.Interface, ps *types.TypeParamList) *Interface {
 	methodMap := make(map[string]*Method, underlyingType.NumMethods())
 	for i := 0; i < underlyingType.NumMethods(); i++ {
 		method := underlyingType.Method(i)
@@ -32,9 +37,13 @@ func newInterfaceFromTypeSpec(name, importPath string, typeSpec *ast.TypeSpec, u
 		methods = append(methods, methodMap[name])
 	}
 
-	var typeParams []*ast.Field
-	if typeSpec.TypeParams != nil {
-		typeParams = typeSpec.TypeParams.List
+	var typeParams []TypeParam
+	if typeSpec.TypeParams != nil && ps != nil {
+		for i, field := range typeSpec.TypeParams.List {
+			for _, name := range field.Names {
+				typeParams = append(typeParams, TypeParam{Name: name.Name, Type: ps.At(i).Constraint()})
+			}
+		}
 	}
 
 	return &Interface{

@@ -30,9 +30,15 @@ func (v *visitor) Visit(node ast.Node) ast.Visitor {
 				name := typeSpec.Name.Name
 				_, obj := v.pkgType.Scope().Innermost(typeSpec.Pos()).LookupParent(name, 0)
 
+				// TODO
+				vr, ok := obj.Type().(*types.Named)
+				if !ok {
+					panic("Expected named type....?")
+				}
+
 				switch t := obj.Type().Underlying().(type) {
 				case *types.Interface:
-					v.types[name] = newInterfaceFromTypeSpec(name, v.importPath, typeSpec, t)
+					v.types[name] = newInterfaceFromTypeSpec(name, v.importPath, typeSpec, t, vr.TypeParams())
 				}
 			}
 		}

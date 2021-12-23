@@ -2,10 +2,10 @@ package generation
 
 import (
 	"fmt"
-	"go/ast"
 	"strconv"
 
 	"github.com/dave/jennifer/jen"
+	"github.com/derision-test/go-mockgen/internal/mockgen/types"
 	"github.com/dustin/go-humanize"
 )
 
@@ -81,7 +81,7 @@ func generateMockFuncCallStruct(iface *wrappedInterface, method *wrappedMethod, 
 	return generateStruct(mockFuncCallStructName, iface.TypeParams, commentText, append(argFields, resultFields...))
 }
 
-func generateStruct(name string, typeParams []*ast.Field, commentText string, structFields []jen.Code) jen.Code {
+func generateStruct(name string, typeParams []types.TypeParam, commentText string, structFields []jen.Code) jen.Code {
 	typeDeclaration := compose(addTypes(jen.Type().Id(name), typeParams, true), jen.Struct(structFields...))
 	return addComment(typeDeclaration, 1, commentText)
 }

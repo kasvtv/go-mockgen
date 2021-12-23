@@ -1,9 +1,8 @@
 package generation
 
 import (
-	"go/ast"
-
 	"github.com/dave/jennifer/jen"
+	"github.com/derision-test/go-mockgen/internal/mockgen/types"
 )
 
 func compose(stmt *jen.Statement, tail ...jen.Code) *jen.Statement {
@@ -24,20 +23,18 @@ func addComment(code *jen.Statement, level int, commentText string) *jen.Stateme
 	return compose(comment, code)
 }
 
-func addTypes(code *jen.Statement, fields []*ast.Field, includeTypes bool) *jen.Statement {
-	if len(fields) == 0 {
+func addTypes(code *jen.Statement, typeParams []types.TypeParam, includeTypes bool) *jen.Statement {
+	if len(typeParams) == 0 {
 		return code
 	}
 
-	types := make([]jen.Code, 0, len(fields))
-	for _, field := range fields {
-		for _, name := range field.Names {
-			if includeTypes {
-				// TODO - use actual constraint
-				types = append(types, jen.Id(name.Name).Any())
-			} else {
-				types = append(types, jen.Id(name.Name))
-			}
+	types := make([]jen.Code, 0, len(typeParams))
+	for _, typeParam := range typeParams {
+		if includeTypes {
+			constraint := generateType(typeParam.Type, "", "", false)          // TODO - pre-calculate
+			types = append(types, compose(jen.Id(typeParam.Name), constraint)) // TODO - move this way earlier
+		} else {
+			types = append(types, jen.Id(typeParam.Name))
 		}
 	}
 
