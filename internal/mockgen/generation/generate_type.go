@@ -16,7 +16,7 @@ func generateType(typ types.Type, importPath, outputImportPath string, variadic 
 
 	switch t := typ.(type) {
 	case *types.Basic:
-		return generateBasicType(t, recur)
+		return generateBasicType(t)
 	case *types.Chan:
 		return generateChanType(t, recur)
 	case *types.Interface:
@@ -24,7 +24,7 @@ func generateType(typ types.Type, importPath, outputImportPath string, variadic 
 	case *types.Map:
 		return generateMapType(t, recur)
 	case *types.Named:
-		return generateNamedType(t, importPath, outputImportPath, recur)
+		return generateNamedType(t, importPath, outputImportPath)
 	case *types.Pointer:
 		return generatePointerType(t, recur)
 	case *types.Signature:
@@ -39,7 +39,7 @@ func generateType(typ types.Type, importPath, outputImportPath string, variadic 
 	}
 }
 
-func generateBasicType(t *types.Basic, _ typeGenerator) *jen.Statement {
+func generateBasicType(t *types.Basic) *jen.Statement {
 	return jen.Id(t.String())
 }
 
@@ -68,7 +68,8 @@ func generateMapType(t *types.Map, generate typeGenerator) *jen.Statement {
 	return compose(jen.Map(generate(t.Key())), generate(t.Elem()))
 }
 
-func generateNamedType(t *types.Named, importPath, outputImportPath string, _ typeGenerator) *jen.Statement {
+func generateNamedType(t *types.Named, importPath, outputImportPath string) *jen.Statement {
+	// TODO - TypeParams
 	return generateQualifiedName(t, importPath, outputImportPath)
 }
 
