@@ -62,14 +62,12 @@ func generateInterfaceType(t *types.Interface, generate typeGenerator) *jen.Stat
 		if union, ok := t.EmbeddedType(i).(*types.Union); ok {
 			types := make([]jen.Code, 0, union.Len())
 			for j := 0; j < union.Len(); j++ {
-				typ := union.Term(j).Type()
-				tilde := union.Term(j).Tilde()
-				tx := generate(typ)
-				if tilde {
-					tx = compose(jen.Op("~"), tx)
+				typ := generate(union.Term(j).Type())
+				if union.Term(j).Tilde() {
+					typ = compose(jen.Op("~"), typ)
 				}
 
-				types = append(types, tx)
+				types = append(types, typ)
 			}
 
 			return jen.Union(types...)
