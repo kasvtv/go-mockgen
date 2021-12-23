@@ -21,12 +21,6 @@ type StringSetIntersector interface {
 	Empty() Set[string]
 }
 
-
-
-
 type unexportedGeneric[T any] interface {
 	Serialize() T
 }
-
-
-
