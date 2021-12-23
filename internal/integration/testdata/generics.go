@@ -13,3 +13,10 @@ type StringSetIntersector interface {
 	// Empty returns an instantiated parametric type
 	Empty() Set[string]
 }
+
+type Map[K comparable, V any] interface {
+	Contains(key K) bool
+	Get(key K) (V, bool)
+	Put(key K, value V) (oldValue V)
+	Remove(key K)
+}
