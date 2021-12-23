@@ -1,6 +1,8 @@
 package generation
 
 import (
+	"go/ast"
+
 	"github.com/dave/jennifer/jen"
 )
 
@@ -22,24 +24,25 @@ func addComment(code *jen.Statement, level int, commentText string) *jen.Stateme
 	return compose(comment, code)
 }
 
-// func addTypes(code jen.Code, fields []*ast.Field, includeTypes bool) jen.Code {
-// 	if len(fields) == 0 {
-// 		return code
-// 	}
+func addTypes(code *jen.Statement, fields []*ast.Field, includeTypes bool) *jen.Statement {
+	if len(fields) == 0 {
+		return code
+	}
 
-// 	types := make([]jen.Code, 0, len(fields))
-// 	for _, field := range fields {
-// 		for _, name := range field.Names {
-// 			if includeTypes {
-// 				types = append(types, name, generateType(field.Type, "", "", false)) // TODO
-// 			} else {
-// 				types = append(types, name)
-// 			}
-// 		}
-// 	}
+	types := make([]jen.Code, 0, len(fields))
+	for _, field := range fields {
+		for _, name := range field.Names {
+			if includeTypes {
+				// TODO - use actual constraint
+				types = append(types, jen.Id(name.Name).Any())
+			} else {
+				types = append(types, jen.Id(name.Name))
+			}
+		}
+	}
 
-// 	return code.Types(types...)
-// }
+	return compose(code, jen.Types(types...))
+}
 
 func selfAppend(sliceRef *jen.Statement, value jen.Code) jen.Code {
 	return compose(sliceRef, jen.Op("=").Id("append").Call(sliceRef, value))

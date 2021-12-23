@@ -2,6 +2,7 @@ package generation
 
 import (
 	"fmt"
+	"go/ast"
 	"strings"
 	"unicode"
 
@@ -38,12 +39,14 @@ func generateMockStructFromConstructor(iface *wrappedInterface, outputImportPath
 	if !unicode.IsUpper([]rune(iface.Name)[0]) {
 		surrogateStructName := fmt.Sprintf("surrogateMock%s", iface.titleName)
 		surrogateDefinition := generateSurrogateInterface(iface, surrogateStructName)
-		constructor := generateMockStructFromConstructorCommon(iface, jen.Id(surrogateStructName))
+		name := addTypes(jen.Id(surrogateStructName), iface.TypeParams, false)
+		constructor := generateMockStructFromConstructorCommon(iface, name)
 		return compose(surrogateDefinition, constructor)
 	}
 
 	importPath := sanitizeImportPath(iface.ImportPath, outputImportPath)
-	return generateMockStructFromConstructorCommon(iface, jen.Qual(importPath, iface.Name))
+	name := addTypes(jen.Qual(importPath, iface.Name), iface.TypeParams, false)
+	return generateMockStructFromConstructorCommon(iface, name)
 }
 
 func generateMockStructFromConstructorCommon(iface *wrappedInterface, ifaceName *jen.Statement) jen.Code {
@@ -76,9 +79,9 @@ func generateConstructor(
 	}
 
 	// return &Mock<Name>{ <constructorField>, ... }
-	returnStatement := compose(jen.Return(), generateStructInitializer(iface.mockStructName, constructorFields...))
-	results := []jen.Code{jen.Op("*").Id(iface.mockStructName)}
-	functionDeclaration := jen.Func().Id(methodName).Params(params...).Params(results...).Block(returnStatement)
+	returnStatement := compose(jen.Return(), generateStructInitializer(iface.mockStructName, iface.TypeParams, constructorFields...))
+	results := []jen.Code{addTypes(jen.Op("*").Id(iface.mockStructName), iface.TypeParams, false)}
+	functionDeclaration := compose(addTypes(jen.Func().Id(methodName), iface.TypeParams, true), jen.Params(params...).Params(results...).Block(returnStatement))
 	return addComment(functionDeclaration, 1, commentText)
 }
 
@@ -119,7 +122,7 @@ func makeDefaultHookField(iface *wrappedInterface, method *wrappedMethod, functi
 	fieldName := fmt.Sprintf("%sFunc", method.Name)
 	structName := fmt.Sprintf("%s%s%sFunc", iface.prefix, iface.titleName, method.Name)
 
-	initializer := generateStructInitializer(structName, compose(
+	initializer := generateStructInitializer(structName, iface.TypeParams, compose(
 		jen.Id("defaultHook").Op(":"),
 		function,
 	))
@@ -128,10 +131,9 @@ func makeDefaultHookField(iface *wrappedInterface, method *wrappedMethod, functi
 	return compose(jen.Id(fieldName), jen.Op(":"), initializer)
 }
 
-func generateStructInitializer(structName string, fields ...jen.Code) jen.Code {
-	// TODO - must have generic names
+func generateStructInitializer(structName string, typeParams []*ast.Field, fields ...jen.Code) jen.Code {
 	// &<StructName>{ fields, ... }
-	return compose(jen.Op("&").Id(structName), jen.Values(padFields(fields)...))
+	return compose(addTypes(jen.Op("&").Id(structName), typeParams, false), jen.Values(padFields(fields)...))
 }
 
 func padFields(fields []jen.Code) []jen.Code {
