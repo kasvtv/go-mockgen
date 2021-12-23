@@ -24,7 +24,7 @@ func generateType(typ types.Type, importPath, outputImportPath string, variadic 
 	case *types.Map:
 		return generateMapType(t, recur)
 	case *types.Named:
-		return generateNamedType(t, importPath, outputImportPath)
+		return generateNamedType(t, importPath, outputImportPath, recur)
 	case *types.Pointer:
 		return generatePointerType(t, recur)
 	case *types.Signature:
@@ -70,9 +70,19 @@ func generateMapType(t *types.Map, generate typeGenerator) *jen.Statement {
 	return compose(jen.Map(generate(t.Key())), generate(t.Elem()))
 }
 
-func generateNamedType(t *types.Named, importPath, outputImportPath string) *jen.Statement {
-	// TODO - TypeParams
-	return generateQualifiedName(t, importPath, outputImportPath)
+func generateNamedType(t *types.Named, importPath, outputImportPath string, generate typeGenerator) *jen.Statement {
+	name := generateQualifiedName(t, importPath, outputImportPath)
+
+	if typeArgs := t.TypeArgs(); typeArgs != nil {
+		typeArguments := make([]jen.Code, 0, typeArgs.Len())
+		for i := 0; i < typeArgs.Len(); i++ {
+			typeArguments = append(typeArguments, generate(typeArgs.At(i)))
+		}
+
+		name = name.Types(typeArguments...)
+	}
+
+	return name
 }
 
 func generatePointerType(t *types.Pointer, generate typeGenerator) *jen.Statement {
