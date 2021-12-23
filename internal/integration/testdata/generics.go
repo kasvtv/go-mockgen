@@ -6,6 +6,13 @@ type Set[T any] interface {
 	Remove(v T)
 }
 
+type Map[K comparable, V any] interface {
+	Contains(key K) bool
+	Get(key K) (V, bool)
+	Put(key K, value V) (oldValue V)
+	Remove(key K)
+}
+
 type StringSetIntersector interface {
 	// Intersect uses instantiated parametric types
 	Intersect(s1, s2 Set[string])
@@ -14,9 +21,12 @@ type StringSetIntersector interface {
 	Empty() Set[string]
 }
 
-type Map[K comparable, V any] interface {
-	Contains(key K) bool
-	Get(key K) (V, bool)
-	Put(key K, value V) (oldValue V)
-	Remove(key K)
+
+
+
+type unexportedGeneric[T any] interface {
+	Serialize() T
 }
+
+
+

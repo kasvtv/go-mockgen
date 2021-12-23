@@ -112,7 +112,7 @@ func generateSurrogateInterface(iface *wrappedInterface, surrogateName string) *
 	}
 
 	// type <SurrogateName> interface { <MethodName>(<Param #n>, ...) (<Result #n>, ...), ... }
-	typeDeclaration := jen.Type().Id(surrogateName).Interface(signatures...).Line()
+	typeDeclaration := compose(jen.Type(), addTypes(jen.Id(surrogateName), iface.TypeParams, true), jen.Interface(signatures...), jen.Line())
 	return addComment(typeDeclaration, 1, surrogateCommentText)
 }
 
