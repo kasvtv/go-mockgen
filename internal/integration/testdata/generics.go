@@ -1,9 +1,21 @@
 package testdata
 
+type Restricted[T uint8 | ~uint16] interface {
+	Accept(v T) bool
+}
+
 type Set[T any] interface {
 	Contains() bool
 	Add(v T)
 	Remove(v T)
+}
+
+type NumericSets interface {
+	//
+	// TODO - stop from generating this
+	//
+
+	int8 | int16 | int64
 }
 
 type Map[K comparable, V any] interface {

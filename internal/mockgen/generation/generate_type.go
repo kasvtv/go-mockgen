@@ -58,6 +58,24 @@ func generateChanType(t *types.Chan, generate typeGenerator) *jen.Statement {
 }
 
 func generateInterfaceType(t *types.Interface, generate typeGenerator) *jen.Statement {
+	for i := 0; i < t.NumEmbeddeds(); i++ {
+		if union, ok := t.EmbeddedType(i).(*types.Union); ok {
+			types := make([]jen.Code, 0, union.Len())
+			for j := 0; j < union.Len(); j++ {
+				typ := union.Term(j).Type()
+				tilde := union.Term(j).Tilde()
+				tx := generate(typ)
+				if tilde {
+					tx = compose(jen.Op("~"), tx)
+				}
+
+				types = append(types, tx)
+			}
+
+			return jen.Union(types...)
+		}
+	}
+
 	methods := make([]jen.Code, 0, t.NumMethods())
 	for i := 0; i < t.NumMethods(); i++ {
 		methods = append(methods, compose(jen.Id(t.Method(i).Name()), generate(t.Method(i).Type())))
@@ -90,9 +108,6 @@ func generatePointerType(t *types.Pointer, generate typeGenerator) *jen.Statemen
 }
 
 func generateSignatureType(t *types.Signature, generate typeGenerator) *jen.Statement {
-	// TODO - TypeParams
-	// TODO - RecvTyeParams
-
 	params := make([]jen.Code, 0, t.Params().Len())
 	for i := 0; i < t.Params().Len(); i++ {
 		params = append(params, compose(jen.Id(t.Params().At(i).Name()), generate(t.Params().At(i).Type())))

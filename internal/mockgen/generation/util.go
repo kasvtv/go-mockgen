@@ -31,8 +31,9 @@ func addTypes(code *jen.Statement, typeParams []types.TypeParam, includeTypes bo
 	types := make([]jen.Code, 0, len(typeParams))
 	for _, typeParam := range typeParams {
 		if includeTypes {
-			constraint := generateType(typeParam.Type, "", "", false)          // TODO - pre-calculate
-			types = append(types, compose(jen.Id(typeParam.Name), constraint)) // TODO - move this way earlier
+			// TODO - pre-calculate
+			constraint := generateType(typeParam.Type, "", "", false)
+			types = append(types, compose(jen.Id(typeParam.Name), constraint))
 		} else {
 			types = append(types, jen.Id(typeParam.Name))
 		}
