@@ -24,6 +24,9 @@ func newMethodFromSignature(name string, signature *types.Signature) *Method {
 		results = append(results, rs.At(i).Type())
 	}
 
+	// TODO - TypeParams
+	// TODO - RecvTyeParams
+
 	return &Method{
 		Name:     name,
 		Params:   params,

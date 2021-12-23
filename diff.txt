@@ -1,0 +1,508 @@
+diff --git c/go.mod w/go.mod
+index 62323be7e918..d9cd135589df 100644
+--- c/go.mod
++++ w/go.mod
+@@ -1,20 +1,29 @@
+ module github.com/derision-test/go-mockgen
+ 
+-go 1.15
++go 1.18 // DO NOT COMMIT
+ 
+ require (
+ 	github.com/alecthomas/kingpin v2.2.6+incompatible
+-	github.com/alecthomas/template v0.0.0-20190718012654-fb15b899a751 // indirect
+-	github.com/alecthomas/units v0.0.0-20210208195552-ff826a37aa15 // indirect
+-	github.com/dave/jennifer v1.4.1
++	github.com/dave/jennifer v1.5.0
+ 	github.com/dustin/go-humanize v1.0.0
+-	github.com/kr/pretty v0.1.0 // indirect
+ 	github.com/mitchellh/go-wordwrap v1.0.1
+ 	github.com/onsi/gomega v1.13.0
+ 	github.com/stretchr/testify v1.7.0
+-	golang.org/x/net v0.0.0-20210614182718-04defd469f4e // indirect
+-	golang.org/x/sys v0.0.0-20210611083646-a4fc73990273 // indirect
+-	golang.org/x/tools v0.1.3
++	golang.org/x/tools v0.1.8
++)
++
++require (
++	github.com/alecthomas/template v0.0.0-20190718012654-fb15b899a751 // indirect
++	github.com/alecthomas/units v0.0.0-20210208195552-ff826a37aa15 // indirect
++	github.com/davecgh/go-spew v1.1.1 // indirect
++	github.com/kr/pretty v0.1.0 // indirect
++	github.com/pmezard/go-difflib v1.0.0 // indirect
++	golang.org/x/mod v0.5.1 // indirect
++	golang.org/x/net v0.0.0-20211015210444-4f30a5c0130f // indirect
++	golang.org/x/sys v0.0.0-20211019181941-9d821ace8654 // indirect
++	golang.org/x/text v0.3.7 // indirect
++	golang.org/x/xerrors v0.0.0-20200804184101-5ec99f83aff1 // indirect
+ 	gopkg.in/check.v1 v1.0.0-20180628173108-788fd7840127 // indirect
++	gopkg.in/yaml.v2 v2.4.0 // indirect
+ 	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b // indirect
+ )
+diff --git c/go.sum w/go.sum
+index 9614605c6b3f..36ec07398494 100644
+--- c/go.sum
++++ w/go.sum
+@@ -4,8 +4,15 @@ github.com/alecthomas/template v0.0.0-20190718012654-fb15b899a751 h1:JYp7IbQjafo
+ github.com/alecthomas/template v0.0.0-20190718012654-fb15b899a751/go.mod h1:LOuyumcjzFXgccqObfd/Ljyb9UuFJ6TxHnclSeseNhc=
+ github.com/alecthomas/units v0.0.0-20210208195552-ff826a37aa15 h1:AUNCr9CiJuwrRYS3XieqF+Z9B9gNxo/eANAJCF2eiN4=
+ github.com/alecthomas/units v0.0.0-20210208195552-ff826a37aa15/go.mod h1:OMCwj8VM1Kc9e19TLln2VL61YJF0x1XFtfdL4JdbSyE=
+-github.com/dave/jennifer v1.4.1 h1:XyqG6cn5RQsTj3qlWQTKlRGAyrTcsk1kUmWdZBzRjDw=
+-github.com/dave/jennifer v1.4.1/go.mod h1:7jEdnm+qBcxl8PC0zyp7vxcpSRnzXSt9r39tpTVGlwA=
++github.com/dave/astrid v0.0.0-20170323122508-8c2895878b14/go.mod h1:Sth2QfxfATb/nW4EsrSi2KyJmbcniZ8TgTaji17D6ms=
++github.com/dave/brenda v1.1.0/go.mod h1:4wCUr6gSlu5/1Tk7akE5X7UorwiQ8Rij0SKH3/BGMOM=
++github.com/dave/courtney v0.3.0/go.mod h1:BAv3hA06AYfNUjfjQr+5gc6vxeBVOupLqrColj+QSD8=
++github.com/dave/gopackages v0.0.0-20170318123100-46e7023ec56e/go.mod h1:i00+b/gKdIDIxuLDFob7ustLAVqhsZRk2qVZrArELGQ=
++github.com/dave/jennifer v1.5.0 h1:HmgPN93bVDpkQyYbqhCHj5QlgvUkvEOzMyEvKLgCRrg=
++github.com/dave/jennifer v1.5.0/go.mod h1:4MnyiFIlZS3l5tSDn8VnzE6ffAhYBMB2SZntBsZGUok=
++github.com/dave/kerr v0.0.0-20170318121727-bc25dd6abe8e/go.mod h1:qZqlPyPvfsDJt+3wHJ1EvSXDuVjFTK0j2p/ca+gtsb8=
++github.com/dave/patsy v0.0.0-20210517141501-957256f50cba/go.mod h1:qfR88CgEGLoiqDaE+xxDCi5QA5v4vUoW0UCX2Nd5Tlc=
++github.com/dave/rebecca v0.9.1/go.mod h1:N6XYdMD/OKw3lkF3ywh8Z6wPGuwNFDNtWYEMFWEmXBA=
+ github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
+ github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
+ github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
+@@ -23,12 +30,10 @@ github.com/golang/protobuf v1.4.0-rc.4.0.20200313231945-b860323f09d0/go.mod h1:W
+ github.com/golang/protobuf v1.4.0/go.mod h1:jodUvKwWbYaEsadDk5Fwe5c77LiNKVO9IDvqG2KuDX0=
+ github.com/golang/protobuf v1.4.2/go.mod h1:oDoupMAO8OvCJWAcko0GGGIgR6R6ocIYbsSw735rRwI=
+ github.com/golang/protobuf v1.5.0/go.mod h1:FsONVRAS9T7sI+LIUmWTfcYkHO4aIWwzhcaSAoJOfIk=
+-github.com/golang/protobuf v1.5.2 h1:ROPKBNFfQgOUMifHyP+KYbvpjbdoFNs+aK7DXlji0Tw=
+ github.com/golang/protobuf v1.5.2/go.mod h1:XVQd3VNwM+JqD3oG2Ue2ip4fOMUkwXdXDdiuN0vRsmY=
+ github.com/google/go-cmp v0.3.0/go.mod h1:8QqcDgzrUqlUb/G2PQTWiueGozuR1884gddMywk6iLU=
+ github.com/google/go-cmp v0.3.1/go.mod h1:8QqcDgzrUqlUb/G2PQTWiueGozuR1884gddMywk6iLU=
+ github.com/google/go-cmp v0.4.0/go.mod h1:v8dTdLbMG2kIc/vJvl+f65V22dbkXbowE6jgT/gNBxE=
+-github.com/google/go-cmp v0.5.5 h1:Khx7svrCpmxxtHBq5j2mp/xVjsi8hQMfNLvJFAlrGgU=
+ github.com/google/go-cmp v0.5.5/go.mod h1:v8dTdLbMG2kIc/vJvl+f65V22dbkXbowE6jgT/gNBxE=
+ github.com/hpcloud/tail v1.0.0/go.mod h1:ab1qPbhIpdTxEkNHXyeSf5vhxWSCs/tWer42PpOxQnU=
+ github.com/kr/pretty v0.1.0 h1:L/CwN0zerZDmRFUapSPitk6f+Q3+0za1rQkzVuMiMFI=
+@@ -49,6 +54,7 @@ github.com/onsi/gomega v1.7.1/go.mod h1:XdKZgCCFLUoM/7CFJVPcG8C1xQ1AJ0vpAezJrB7J
+ github.com/onsi/gomega v1.10.1/go.mod h1:iN09h71vgCQne3DLsj+A5owkum+a2tYe+TOCB1ybHNo=
+ github.com/onsi/gomega v1.13.0 h1:7lLHu94wT9Ij0o6EWWclhu0aOh32VxhkwEJvzuWPeak=
+ github.com/onsi/gomega v1.13.0/go.mod h1:lRk9szgn8TxENtWd0Tp4c3wjlRfMTMH27I+3Je41yGY=
++github.com/pkg/errors v0.9.1/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINEl0=
+ github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
+ github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
+ github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
+@@ -57,22 +63,21 @@ github.com/stretchr/testify v1.5.1/go.mod h1:5W2xD1RspED5o8YsWQXVCued0rvSQ+mT+I5
+ github.com/stretchr/testify v1.7.0 h1:nwc3DEeHmmLAfoZucVR881uASk0Mfjw8xYJ99tb5CcY=
+ github.com/stretchr/testify v1.7.0/go.mod h1:6Fq8oRcR53rry900zMqJjRRixrwX3KX962/h/Wwjteg=
+ github.com/yuin/goldmark v1.2.1/go.mod h1:3hX8gzYuyVAZsxl0MRgGTJEmQBFcNTphYh9decYSb74=
+-github.com/yuin/goldmark v1.3.5/go.mod h1:mwnBkeHKe2W/ZEtQ+71ViKU8L12m81fl3OWwC1Zlc8k=
++github.com/yuin/goldmark v1.4.1/go.mod h1:mwnBkeHKe2W/ZEtQ+71ViKU8L12m81fl3OWwC1Zlc8k=
+ golang.org/x/crypto v0.0.0-20190308221718-c2843e01d9a2/go.mod h1:djNgcEr1/C05ACkg1iLfiJU5Ep61QUkGW8qpdssI0+w=
+ golang.org/x/crypto v0.0.0-20191011191535-87dc89f01550/go.mod h1:yigFU9vqHzYiE8UmvKecakEJjdnWj3jj499lnFckfCI=
+ golang.org/x/crypto v0.0.0-20200622213623-75b288015ac9/go.mod h1:LzIPMQfyMNhhGPhUkYOs5KpL4U8rLKemX1yGLhDgUto=
+ golang.org/x/mod v0.3.0/go.mod h1:s0Qsj1ACt9ePp/hMypM3fl4fZqREWJwdYDEqhRiZZUA=
+-golang.org/x/mod v0.4.2 h1:Gz96sIWK3OalVv/I/qNygP42zyoKp3xptRVCWRFEBvo=
+-golang.org/x/mod v0.4.2/go.mod h1:s0Qsj1ACt9ePp/hMypM3fl4fZqREWJwdYDEqhRiZZUA=
++golang.org/x/mod v0.5.1 h1:OJxoQ/rynoF0dcCdI7cLPktw/hR2cueqYfjm43oqK38=
++golang.org/x/mod v0.5.1/go.mod h1:5OXOZSfqPIIbmVBIIKWRFfZjPR0E5r58TLhUjH0a2Ro=
+ golang.org/x/net v0.0.0-20180906233101-161cd47e91fd/go.mod h1:mL1N/T3taQHkDXs73rZJwtUhF3w3ftmwwsq0BUmARs4=
+ golang.org/x/net v0.0.0-20190404232315-eb5bcb51f2a3/go.mod h1:t9HGtf8HONx5eT2rtn7q6eTqICYqUVnKs3thJo3Qplg=
+ golang.org/x/net v0.0.0-20190620200207-3b0461eec859/go.mod h1:z5CRVTTTmAJ677TzLLGU+0bjPO0LkuOLi4/5GtJWs/s=
+ golang.org/x/net v0.0.0-20200520004742-59133d7f0dd7/go.mod h1:qpuaurCH72eLCgpAm/N6yyVIVM9cpaDIP3A8BGJEC5A=
+ golang.org/x/net v0.0.0-20201021035429-f5854403a974/go.mod h1:sp8m0HH+o8qH0wwXwYZr8TS3Oi6o0r6Gce1SSxlDquU=
+-golang.org/x/net v0.0.0-20210405180319-a5a99cb37ef4/go.mod h1:p54w0d4576C0XHj96bSt6lcn1PtDYWL6XObtHCRCNQM=
+ golang.org/x/net v0.0.0-20210428140749-89ef3d95e781/go.mod h1:OJAsFXCWl8Ukc7SiCT/9KSuxbyM7479/AVlXFRxuMCk=
+-golang.org/x/net v0.0.0-20210614182718-04defd469f4e h1:XpT3nA5TvE525Ne3hInMh6+GETgn27Zfm9dxsThnX2Q=
+-golang.org/x/net v0.0.0-20210614182718-04defd469f4e/go.mod h1:9nx3DQGgdP8bBQD5qxJ1jj9UTztislL4KSBs9R2vV5Y=
++golang.org/x/net v0.0.0-20211015210444-4f30a5c0130f h1:OfiFi4JbukWwe3lzw+xunroH1mnC1e2Gy5cxNJApiSY=
++golang.org/x/net v0.0.0-20211015210444-4f30a5c0130f/go.mod h1:9nx3DQGgdP8bBQD5qxJ1jj9UTztislL4KSBs9R2vV5Y=
+ golang.org/x/sync v0.0.0-20180314180146-1d60e4601c6f/go.mod h1:RxMgew5VJxzue5/jJTE5uejpjVlOe/izrB70Jof72aM=
+ golang.org/x/sync v0.0.0-20190423024810-112230192c58/go.mod h1:RxMgew5VJxzue5/jJTE5uejpjVlOe/izrB70Jof72aM=
+ golang.org/x/sync v0.0.0-20201020160332-67f06af15bc9/go.mod h1:RxMgew5VJxzue5/jJTE5uejpjVlOe/izrB70Jof72aM=
+@@ -87,21 +92,20 @@ golang.org/x/sys v0.0.0-20200323222414-85ca7c5b95cd/go.mod h1:h1NjWce9XRLGQEsW7w
+ golang.org/x/sys v0.0.0-20200930185726-fdedc70b468f/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
+ golang.org/x/sys v0.0.0-20201119102817-f84b799fce68/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
+ golang.org/x/sys v0.0.0-20210112080510-489259a85091/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
+-golang.org/x/sys v0.0.0-20210330210617-4fbd30eecc44/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
+ golang.org/x/sys v0.0.0-20210423082822-04245dca01da/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
+-golang.org/x/sys v0.0.0-20210510120138-977fb7262007/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=
+-golang.org/x/sys v0.0.0-20210611083646-a4fc73990273 h1:faDu4veV+8pcThn4fewv6TVlNCezafGoC1gM/mxQLbQ=
+-golang.org/x/sys v0.0.0-20210611083646-a4fc73990273/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=
++golang.org/x/sys v0.0.0-20211019181941-9d821ace8654 h1:id054HUawV2/6IGm2IV8KZQjqtwAOo2CYlOToYqa0d0=
++golang.org/x/sys v0.0.0-20211019181941-9d821ace8654/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=
+ golang.org/x/term v0.0.0-20201126162022-7de9c90e9dd1/go.mod h1:bj7SfCRtBDWHUb9snDiAeCFNEtKQo2Wmx5Cou7ajbmo=
+ golang.org/x/text v0.3.0/go.mod h1:NqM8EUOU14njkJ3fqMW+pc6Ldnwhi/IjpwHt7yyuwOQ=
+ golang.org/x/text v0.3.3/go.mod h1:5Zoc/QRtKVWzQhOtBMvqHzDpF6irO9z98xDceosuGiQ=
+-golang.org/x/text v0.3.6 h1:aRYxNxv6iGQlyVaZmk6ZgYEDa+Jg18DxebPSrd6bg1M=
+ golang.org/x/text v0.3.6/go.mod h1:5Zoc/QRtKVWzQhOtBMvqHzDpF6irO9z98xDceosuGiQ=
++golang.org/x/text v0.3.7 h1:olpwvP2KacW1ZWvsR7uQhoyTYvKAupfQrRGBFM352Gk=
++golang.org/x/text v0.3.7/go.mod h1:u+2+/6zg+i71rQMx5EYifcz6MCKuco9NR6JIITiCfzQ=
+ golang.org/x/tools v0.0.0-20180917221912-90fa682c2a6e/go.mod h1:n7NCudcB/nEzxVGmLbDWY5pfWTLqBcC2KZ6jyYvM4mQ=
+ golang.org/x/tools v0.0.0-20191119224855-298f0cb1881e/go.mod h1:b+2E5dAYhXwXZwtnZ6UAqBI28+e2cm9otk0dWdXHAEo=
+ golang.org/x/tools v0.0.0-20201224043029-2b0845dc783e/go.mod h1:emZCQorbCU4vsT4fOWvOPXz4eW1wZW4PmDk9uLelYpA=
+-golang.org/x/tools v0.1.3 h1:L69ShwSZEyCsLKoAxDKeMvLDZkumEe8gXUZAjab0tX8=
+-golang.org/x/tools v0.1.3/go.mod h1:o0xws9oXOQQZyjljx8fwUC0k7L1pTE6eaCbjGeHmOkk=
++golang.org/x/tools v0.1.8 h1:P1HhGGuLW4aAclzjtmJdf0mJOjVUZUzOTqkAkWL+l6w=
++golang.org/x/tools v0.1.8/go.mod h1:nABZi5QlRsZVlzPpHl034qft6wpY4eDcsTt5AaioBiU=
+ golang.org/x/xerrors v0.0.0-20190717185122-a985d3407aa7/go.mod h1:I/5z698sn9Ka8TeJc9MKroUUfqBBauWjQqLJ2OPfmY0=
+ golang.org/x/xerrors v0.0.0-20191011141410-1b5146add898/go.mod h1:I/5z698sn9Ka8TeJc9MKroUUfqBBauWjQqLJ2OPfmY0=
+ golang.org/x/xerrors v0.0.0-20191204190536-9bdfabe68543/go.mod h1:I/5z698sn9Ka8TeJc9MKroUUfqBBauWjQqLJ2OPfmY0=
+@@ -114,7 +118,6 @@ google.golang.org/protobuf v1.20.1-0.20200309200217-e05f789c0967/go.mod h1:A+miE
+ google.golang.org/protobuf v1.21.0/go.mod h1:47Nbq4nVaFHyn7ilMalzfO3qCViNmqZ2kzikPIcrTAo=
+ google.golang.org/protobuf v1.23.0/go.mod h1:EGpADcykh3NcUnDUJcl1+ZksZNG86OlYog2l/sGQquU=
+ google.golang.org/protobuf v1.26.0-rc.1/go.mod h1:jlhhOSvTdKEhbULTjvd4ARK9grFBp09yW+WbY/TyQbw=
+-google.golang.org/protobuf v1.26.0 h1:bxAC2xTBsZGibn2RTntX0oH50xLsqy1OxA9tTL3p/lk=
+ google.golang.org/protobuf v1.26.0/go.mod h1:9q0QmTI4eRPtz6boOQmLYwt+qCgq0jsYwAQnmE0givc=
+ gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405/go.mod h1:Co6ibVJAznAaIkqp8huTwlJQCZ016jof/cbN4VW5Yz0=
+ gopkg.in/check.v1 v1.0.0-20180628173108-788fd7840127 h1:qIbj1fsPNlZgppZ+VLlY7N33q108Sa+fhmuc+sWQYwY=
+diff --git c/internal/integration/gen.go w/internal/integration/gen.go
+index 3a4042f3bad8..0f813e50ad7c 100644
+--- c/internal/integration/gen.go
++++ w/internal/integration/gen.go
+@@ -1,3 +1,3 @@
+ package integration
+ 
+-//go:generate go run ../../cmd/go-mockgen ./testdata -f -d ./testdata/mocks --disable-formatting
++//go:generate /usr/local/go/bin/go run ../../cmd/go-mockgen ./testdata -f -d ./testdata/mocks --disable-formatting
+diff --git c/internal/integration/testdata/empty.go w/internal/integration/testdata/backup/empty.go
+similarity index 100%
+rename from internal/integration/testdata/empty.go
+rename to internal/integration/testdata/backup/empty.go
+diff --git c/internal/integration/testdata/reference.go w/internal/integration/testdata/backup/reference.go
+similarity index 100%
+rename from internal/integration/testdata/reference.go
+rename to internal/integration/testdata/backup/reference.go
+diff --git c/internal/integration/testdata/relation.go w/internal/integration/testdata/backup/relation.go
+similarity index 100%
+rename from internal/integration/testdata/relation.go
+rename to internal/integration/testdata/backup/relation.go
+diff --git c/internal/integration/testdata/unexported.go w/internal/integration/testdata/backup/unexported.go
+similarity index 100%
+rename from internal/integration/testdata/unexported.go
+rename to internal/integration/testdata/backup/unexported.go
+diff --git c/internal/integration/testdata/variadic_args.go w/internal/integration/testdata/backup/variadic_args.go
+similarity index 100%
+rename from internal/integration/testdata/variadic_args.go
+rename to internal/integration/testdata/backup/variadic_args.go
+diff --git c/internal/integration/testdata/variadic_non_interface.go w/internal/integration/testdata/backup/variadic_non_interface.go
+similarity index 100%
+rename from internal/integration/testdata/variadic_non_interface.go
+rename to internal/integration/testdata/backup/variadic_non_interface.go
+diff --git c/internal/integration/testdata/generics.go w/internal/integration/testdata/generics.go
+new file mode 100644
+index 000000000000..8382943d0123
+--- /dev/null
++++ w/internal/integration/testdata/generics.go
+@@ -0,0 +1,23 @@
++package testdata
++
++// type SignedInteger interface {
++// 	int | int8 | int16 | int32 | int64
++// }
++
++type Set[T any] interface {
++	Contains() bool
++	Add(v T)
++	Remove(v T)
++}
++
++// type SignedIntegerSet[T SignedInteger] interface {
++// 	Contains() bool
++// 	Add(v T)
++// 	Remove(v T)
++// }
++
++// type SignedIntegerSetMap[K comparable, V SignedInteger] interface {
++// 	Get(k K) (V, bool)
++// 	Put(k K, v V) V
++// 	Remove(k K)
++// }
+diff --git c/internal/mockgen/generation/generator.go w/internal/mockgen/generation/generator.go
+index ba4b7ae58b8f..83ff4b0ef574 100644
+--- c/internal/mockgen/generation/generator.go
++++ w/internal/mockgen/generation/generator.go
+@@ -2,6 +2,7 @@ package generation
+ 
+ import (
+ 	"fmt"
++	"go/ast"
+ 	"strings"
+ 	"unicode"
+ 
+@@ -118,6 +119,9 @@ func generateMockStruct(iface *wrappedInterface, outputImportPath string) jen.Co
+ 	commentFmt := "%s is a mock implementation of the %s interface (from the package %s) used for unit testing."
+ 	comment := GenerateComment(1, commentFmt, iface.mockStructName, iface.Name, iface.ImportPath)
+ 
++	typeParams := generateTypeParams(iface.TypeParams, false)
++	typeParamsA := generateTypeParams(iface.TypeParams, true)
++
+ 	structFields := []jen.Code{}
+ 	for _, method := range iface.Methods {
+ 		name := fmt.Sprintf(funcFieldFormat, method.Name)
+@@ -128,7 +132,8 @@ func generateMockStruct(iface *wrappedInterface, outputImportPath string) jen.Co
+ 		hookFuncField := comment.
+ 			Id(name).
+ 			Op("*").
+-			Id(fmt.Sprintf(funcStructFormat, iface.prefix, iface.titleName, method.Name))
++			Id(fmt.Sprintf(funcStructFormat, iface.prefix, iface.titleName, method.Name)).
++			Types(typeParamsA...)
+ 
+ 		structFields = append(structFields, hookFuncField)
+ 	}
+@@ -136,6 +141,7 @@ func generateMockStruct(iface *wrappedInterface, outputImportPath string) jen.Co
+ 	return comment.
+ 		Type().
+ 		Id(iface.mockStructName).
++		Types(typeParams...).
+ 		Struct(structFields...)
+ }
+ 
+@@ -160,6 +166,7 @@ func generateMockStructConstructor(iface *wrappedInterface, outputImportPath str
+ 
+ 		zeroFunction := GenerateFunction(
+ 			"",
++			nil, // TODO
+ 			method.paramTypes,
+ 			GenerateResultTypes(method.Method, iface.ImportPath, outputImportPath),
+ 			jen.Return().List(zeroes...),
+@@ -183,11 +190,15 @@ func generateMockStructConstructor(iface *wrappedInterface, outputImportPath str
+ 
+ 	constructorFields = append(constructorFields, jen.Line())
+ 
++	typeParams := generateTypeParams(iface.TypeParams, false)
++	typeParamsA := generateTypeParams(iface.TypeParams, true)
++
+ 	functionDecl := GenerateFunction(
+ 		name,
++		typeParamsA,
+ 		nil,
+-		[]jen.Code{jen.Op("*").Id(iface.mockStructName)},
+-		jen.Return().Op("&").Id(iface.mockStructName).Values(constructorFields...),
++		[]jen.Code{jen.Op("*").Id(iface.mockStructName).Types(typeParams...)},
++		jen.Return().Op("&").Id(iface.mockStructName).Types(typeParams...).Values(constructorFields...),
+ 	)
+ 
+ 	return Compose(comment, functionDecl)
+@@ -211,6 +222,7 @@ func generateMockStructStrictConstructor(iface *wrappedInterface, outputImportPa
+ 
+ 		panickingFunction := GenerateFunction(
+ 			"",
++			nil, // TODO
+ 			method.paramTypes,
+ 			GenerateResultTypes(method.Method, iface.ImportPath, outputImportPath),
+ 			jen.Panic(jen.Lit(fmt.Sprintf("unexpected invocation of %s.%s", iface.mockStructName, method.Method.Name))),
+@@ -234,18 +246,44 @@ func generateMockStructStrictConstructor(iface *wrappedInterface, outputImportPa
+ 
+ 	constructorFields = append(constructorFields, jen.Line())
+ 
++	typeParams := generateTypeParams(iface.TypeParams, false)
++	typeParamsA := generateTypeParams(iface.TypeParams, true)
++
+ 	functionDecl := GenerateFunction(
+ 		name,
++		typeParamsA,
+ 		nil,
+-		[]jen.Code{jen.Op("*").Id(iface.mockStructName)},
+-		jen.Return().Op("&").Id(iface.mockStructName).Values(constructorFields...),
++		[]jen.Code{jen.Op("*").Id(iface.mockStructName).Types(typeParams...)},
++		jen.Return().Op("&").Id(iface.mockStructName).Types(typeParams...).Values(constructorFields...),
+ 	)
+ 
+ 	return Compose(comment, functionDecl)
+ }
+ 
++// TODO - move
++func generateTypeParams(typeParams []*ast.Field, withTypes bool) []jen.Code {
++	generated := make([]jen.Code, 0, len(typeParams))
++	for _, typeParam := range typeParams {
++		for _, name := range typeParam.Names {
++			c := jen.Id(name.Name)
++			if withTypes {
++				// TODO - use actual constraint
++				c = c.Any()
++			}
++
++			generated = append(generated, c)
++		}
++	}
++
++	return generated
++}
++
+ func generateMockStructFromConstructor(iface *wrappedInterface, outputImportPath string) jen.Code {
++	typeParams := generateTypeParams(iface.TypeParams, false)
++	typeParamsA := generateTypeParams(iface.TypeParams, true)
++
+ 	ifaceName := jen.Qual(SanitizeImportPath(iface.ImportPath, outputImportPath), iface.Name)
++	ifaceName = ifaceName.Types(typeParams...)
+ 
+ 	var surrogate *jen.Statement
+ 	if !unicode.IsUpper([]rune(iface.Name)[0]) {
+@@ -258,6 +296,7 @@ func generateMockStructFromConstructor(iface *wrappedInterface, outputImportPath
+ 			signatures = append(signatures, jen.Id(method.Name).Params(method.paramTypes...).Params(method.resultTypes...))
+ 		}
+ 
++		// TODO - test types here
+ 		ifaceName = jen.Id(name)
+ 		surrogate = comment.Type().Id(name).Interface(signatures...).Line()
+ 	}
+@@ -288,9 +327,10 @@ func generateMockStructFromConstructor(iface *wrappedInterface, outputImportPath
+ 
+ 	functionDecl := GenerateFunction(
+ 		name,
++		typeParamsA,
+ 		[]jen.Code{Compose(jen.Id("i"), ifaceName)},
+-		[]jen.Code{jen.Op("*").Id(iface.mockStructName)},
+-		jen.Return().Op("&").Id(iface.mockStructName).Values(constructorFields...),
++		[]jen.Code{jen.Op("*").Id(iface.mockStructName).Types(typeParams...)},
++		jen.Return().Op("&").Id(iface.mockStructName).Types(typeParams...).Values(constructorFields...),
+ 	)
+ 
+ 	if surrogate != nil {
+@@ -429,6 +469,7 @@ func generateReturnMethod(iface *wrappedInterface, method *wrappedMethod, method
+ 
+ 	function := GenerateFunction(
+ 		"",
++		nil, // TODO
+ 		method.paramTypes,
+ 		method.resultTypes,
+ 		jen.Return().List(names...),
+diff --git c/internal/mockgen/generation/signature.go w/internal/mockgen/generation/signature.go
+index a38383817795..5150bf7c50f5 100644
+--- c/internal/mockgen/generation/signature.go
++++ w/internal/mockgen/generation/signature.go
+@@ -7,9 +7,18 @@ import (
+ 	"github.com/derision-test/go-mockgen/internal/mockgen/types"
+ )
+ 
+-func GenerateFunction(methodName string, params, results []jen.Code, body ...jen.Code) jen.Code {
++func GenerateFunction(methodName string, typeParams []jen.Code, params, results []jen.Code, body ...jen.Code) jen.Code {
++	if len(typeParams) == 0 {
++		return jen.Func().
++			Id(methodName).
++			Params(params...).
++			Params(results...).
++			Block(body...)
++	}
++
+ 	return jen.Func().
+ 		Id(methodName).
++		Types(typeParams...).
+ 		Params(params...).
+ 		Params(results...).
+ 		Block(body...)
+diff --git c/internal/mockgen/generation/types.go w/internal/mockgen/generation/types.go
+index bb45cc7c704a..b067fe2d4015 100644
+--- c/internal/mockgen/generation/types.go
++++ w/internal/mockgen/generation/types.go
+@@ -55,6 +55,9 @@ func GenerateType(typ types.Type, importPath, outputImportPath string, variadic
+ 		return Compose(jen.Op("*"), recur(t.Elem()))
+ 
+ 	case *types.Signature:
++		// TODO - handle RecvTypeParams and TypeParams
++		// TODO - explain why not?
++
+ 		params := []jen.Code{}
+ 		for i := 0; i < t.Params().Len(); i++ {
+ 			params = append(params, Compose(jen.Id(t.Params().At(i).Name()), recur(t.Params().At(i).Type())))
+@@ -78,6 +81,9 @@ func GenerateType(typ types.Type, importPath, outputImportPath string, variadic
+ 
+ 		return jen.Struct(fields...)
+ 
++	case *types.TypeParam:
++		return jen.Id(typ.String())
++
+ 	default:
+ 		panic(fmt.Sprintf("unsupported case: %#v\n", typ))
+ 	}
+@@ -88,6 +94,7 @@ func stripVendor(path string) string {
+ 	return parts[len(parts)-1]
+ }
+ 
++// TODO - handle TypeParams
+ func generateQualifiedName(t *types.Named, importPath, outputImportPath string) *jen.Statement {
+ 	name := t.Obj().Name()
+ 
+diff --git c/internal/mockgen/generation/zero_values.go w/internal/mockgen/generation/zero_values.go
+index 4990371c672e..8c14dd55ef0c 100644
+--- c/internal/mockgen/generation/zero_values.go
++++ w/internal/mockgen/generation/zero_values.go
+@@ -1,6 +1,7 @@
+ package generation
+ 
+ import (
++	"fmt"
+ 	"go/types"
+ 
+ 	"github.com/dave/jennifer/jen"
+@@ -28,6 +29,9 @@ func GenerateZeroValue(typ types.Type, importPath, outputImportPath string) *jen
+ 
+ 	case *types.Struct:
+ 		return GenerateType(typ, importPath, outputImportPath, false).Block()
++
++	default:
++		fmt.Printf("MISSING GenerateZeroValue FOR: %T\n", typ)
+ 	}
+ 
+ 	return jen.Nil()
+diff --git c/internal/mockgen/types/extract.go w/internal/mockgen/types/extract.go
+index 6af8f84e3800..023abdf56074 100644
+--- c/internal/mockgen/types/extract.go
++++ w/internal/mockgen/types/extract.go
+@@ -132,9 +132,14 @@ func (v *visitor) Visit(node ast.Node) ast.Visitor {
+ 				name := typeSpec.Name.Name
+ 				_, obj := v.pkgType.Scope().Innermost(typeSpec.Pos()).LookupParent(name, 0)
+ 
++				var typeParams []*ast.Field
++				if typeSpec.TypeParams != nil {
++					typeParams = typeSpec.TypeParams.List
++				}
++
+ 				switch t := obj.Type().Underlying().(type) {
+ 				case *types.Interface:
+-					v.types[name] = deconstructInterface(name, v.importPath, t)
++					v.types[name] = deconstructInterface(name, v.importPath, typeParams, t)
+ 				}
+ 			}
+ 		}
+@@ -143,7 +148,7 @@ func (v *visitor) Visit(node ast.Node) ast.Visitor {
+ 	return v
+ }
+ 
+-func deconstructInterface(name, importPath string, typeSpec *types.Interface) *Interface {
++func deconstructInterface(name, importPath string, typeParams []*ast.Field, typeSpec *types.Interface) *Interface {
+ 	methodMap := map[string]*Method{}
+ 	for i := 0; i < typeSpec.NumMethods(); i++ {
+ 		method := typeSpec.Method(i)
+@@ -165,12 +170,19 @@ func deconstructInterface(name, importPath string, typeSpec *types.Interface) *I
+ 	return &Interface{
+ 		Name:       name,
+ 		ImportPath: importPath,
++		TypeParams: typeParams,
+ 		Type:       InterfaceTypeInterface,
+ 		Methods:    methods,
+ 	}
+ }
+ 
++// TODO - handle RecvTypeParams and TypeParams
++// TODO - explain why we don't need to handle them
+ func deconstructMethod(name string, signature *types.Signature) *Method {
++	// fmt.Printf("SIGNATURE: %v\n", signature)
++	// fmt.Printf("RecvTypeParams: %v\n", signature.RecvTypeParams())
++	// fmt.Printf("TypeParams: %v\n", signature.TypeParams())
++
+ 	ps := signature.Params()
+ 	params := []types.Type{}
+ 	for i := 0; i < ps.Len(); i++ {
+diff --git c/internal/mockgen/types/types.go w/internal/mockgen/types/types.go
+index ccdf1bf9fdf2..bf1a0bd42b45 100644
+--- c/internal/mockgen/types/types.go
++++ w/internal/mockgen/types/types.go
+@@ -2,6 +2,7 @@ package types
+ 
+ import (
+ 	"fmt"
++	"go/ast"
+ 	"go/types"
+ 	"sort"
+ )
+@@ -9,6 +10,7 @@ import (
+ type Interface struct {
+ 	Name       string
+ 	ImportPath string
++	TypeParams []*ast.Field
+ 	Type       InterfaceType
+ 	Methods    []*Method
+ }

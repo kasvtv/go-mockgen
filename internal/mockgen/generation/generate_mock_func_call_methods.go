@@ -81,6 +81,7 @@ func generateMockFuncCallMethod(
 	params, results []jen.Code,
 	body ...jen.Code,
 ) jen.Code {
+	// TODO - must have generic names
 	mockFuncCallStructName := fmt.Sprintf("%s%s%sFuncCall", iface.prefix, iface.titleName, method.Name)
 	receiver := jen.Id("c").Id(mockFuncCallStructName)
 	methodDeclaration := jen.Func().Params(receiver).Id(methodName).Params(params...).Params(results...).Block(body...)

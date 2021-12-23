@@ -70,6 +70,7 @@ func generateMockMethod(
 		params = append(params, compose(jen.Id(fmt.Sprintf("v%d", i)), param))
 	}
 
+	// TODO - must have generic names
 	receiver := jen.Id("m").Op("*").Id(iface.mockStructName)
 	methodDeclaration := jen.Func().Params(receiver).Id(method.Name).Params(params...).Params(method.resultTypes...).Block(body...)
 	return addComment(methodDeclaration, 1, commentText)

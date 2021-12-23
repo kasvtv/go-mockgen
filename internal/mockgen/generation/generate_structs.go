@@ -81,6 +81,7 @@ func generateMockFuncCallStruct(iface *wrappedInterface, method *wrappedMethod, 
 }
 
 func generateStruct(name string, commentText string, structFields []jen.Code) jen.Code {
+	// TODO - needs to have type parameters here
 	typeDeclaration := jen.Type().Id(name).Struct(structFields...)
 	return addComment(typeDeclaration, 1, commentText)
 }

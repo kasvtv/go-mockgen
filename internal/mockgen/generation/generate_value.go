@@ -21,6 +21,7 @@ func generateZeroValue(typ types.Type, importPath, outputImportPath string) *jen
 
 	case *types.Named:
 		if shouldEmitNamedType(t) {
+			// TODO - TypeParams
 			return compose(generateQualifiedName(t, importPath, outputImportPath), jen.Block())
 		}
 

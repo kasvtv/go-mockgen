@@ -32,7 +32,7 @@ func (v *visitor) Visit(node ast.Node) ast.Visitor {
 
 				switch t := obj.Type().Underlying().(type) {
 				case *types.Interface:
-					v.types[name] = newInterfaceFromTypeSpec(name, v.importPath, t)
+					v.types[name] = newInterfaceFromTypeSpec(name, v.importPath, typeSpec, t)
 				}
 			}
 		}

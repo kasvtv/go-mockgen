@@ -38,14 +38,12 @@ func generateMockStructFromConstructor(iface *wrappedInterface, outputImportPath
 	if !unicode.IsUpper([]rune(iface.Name)[0]) {
 		surrogateStructName := fmt.Sprintf("surrogateMock%s", iface.titleName)
 		surrogateDefinition := generateSurrogateInterface(iface, surrogateStructName)
-		name := jen.Id(surrogateStructName)
-		constructor := generateMockStructFromConstructorCommon(iface, name)
+		constructor := generateMockStructFromConstructorCommon(iface, jen.Id(surrogateStructName))
 		return compose(surrogateDefinition, constructor)
 	}
 
 	importPath := sanitizeImportPath(iface.ImportPath, outputImportPath)
-	name := jen.Qual(importPath, iface.Name)
-	return generateMockStructFromConstructorCommon(iface, name)
+	return generateMockStructFromConstructorCommon(iface, jen.Qual(importPath, iface.Name))
 }
 
 func generateMockStructFromConstructorCommon(iface *wrappedInterface, ifaceName *jen.Statement) jen.Code {
@@ -131,6 +129,7 @@ func makeDefaultHookField(iface *wrappedInterface, method *wrappedMethod, functi
 }
 
 func generateStructInitializer(structName string, fields ...jen.Code) jen.Code {
+	// TODO - must have generic names
 	// &<StructName>{ fields, ... }
 	return compose(jen.Op("&").Id(structName), jen.Values(padFields(fields)...))
 }

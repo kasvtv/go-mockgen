@@ -33,6 +33,8 @@ func generateType(typ types.Type, importPath, outputImportPath string, variadic 
 		return generateSliceType(t, variadic, recur)
 	case *types.Struct:
 		return generateStructType(t, recur)
+	case *types.TypeParam:
+		return generateTypeParamType(t)
 
 	default:
 		panic(fmt.Sprintf("unsupported case: %#v\n", typ))
@@ -78,6 +80,9 @@ func generatePointerType(t *types.Pointer, generate typeGenerator) *jen.Statemen
 }
 
 func generateSignatureType(t *types.Signature, generate typeGenerator) *jen.Statement {
+	// TODO - TypeParams
+	// TODO - RecvTyeParams
+
 	params := make([]jen.Code, 0, t.Params().Len())
 	for i := 0; i < t.Params().Len(); i++ {
 		params = append(params, compose(jen.Id(t.Params().At(i).Name()), generate(t.Params().At(i).Type())))
@@ -106,4 +111,8 @@ func generateStructType(t *types.Struct, generate typeGenerator) *jen.Statement 
 	}
 
 	return jen.Struct(fields...)
+}
+
+func generateTypeParamType(t *types.TypeParam) *jen.Statement {
+	return jen.Id(t.String())
 }
