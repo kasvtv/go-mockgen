@@ -1,3 +1,3 @@
 package integration
 
-//go:generate go run ../../cmd/go-mockgen ./testdata -f -d ./testdata/mocks --disable-formatting
+//go:generate /usr/local/go/bin/go run ../../cmd/go-mockgen ./testdata -f -d ./testdata/mocks --disable-formatting
