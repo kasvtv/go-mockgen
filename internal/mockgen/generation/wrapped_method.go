@@ -30,7 +30,6 @@ func wrapMethod(iface *types.Interface, method *types.Method, outputImportPath s
 func generateParamTypes(method *types.Method, importPath, outputImportPath string, omitDots bool) []jen.Code {
 	params := make([]jen.Code, 0, len(method.Params))
 	for i, typ := range method.Params {
-
 		params = append(params, generateType(
 			typ,
 			importPath,
